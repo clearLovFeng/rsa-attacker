@@ -1,0 +1,20 @@
+url="http://sagecell.sagemath.org/"
+p4 = ?
+n = ?
+
+pbits = 1024
+kbits = pbits - p4.nbits()
+print p4.nbits()
+p4 = p4 << kbits
+
+PR.<x> = PolynomialRing(Zmod(n))
+f = x + p4
+x0 = f.small_roots(X=2^kbits, beta=0.4)[0]
+print "x: %s" %hex(int(x0))
+
+p = p4+x0
+print "p: ", hex(int(p))
+assert n % p == 0
+q = n/int(p)
+
+print "q: ", hex(int(q))
